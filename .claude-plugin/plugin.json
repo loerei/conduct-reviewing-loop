@@ -1,0 +1,24 @@
+{
+  "name": "conduct-reviewing-loop",
+  "version": "1.0.0",
+  "description": "Multi-agent review loops that force AI agents to stop grading their own homework.",
+  "author": {
+    "name": "loerei",
+    "url": "https://github.com/loerei"
+  },
+  "homepage": "https://github.com/loerei/conduct-reviewing-loop",
+  "repository": "https://github.com/loerei/conduct-reviewing-loop",
+  "license": "MIT",
+  "skills": [
+    {
+      "name": "conduct-reviewing-loop",
+      "path": "skills/conduct-reviewing-loop/SKILL.md",
+      "description": "Fast single-reviewer audit loop for implementation plans (Mode A) and code diffs (Mode B)."
+    },
+    {
+      "name": "conduct-deep-reviewing-loop",
+      "path": "skills/conduct-deep-reviewing-loop/SKILL.md",
+      "description": "Multi-agent deep reviewing loop with 10 specialist roles across 4 Tiers, topological DAG routing, and anti-anchoring air-gap."
+    }
+  ]
+}
