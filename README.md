@@ -72,7 +72,7 @@ flowchart TD
 
 Both skills exist to stop AI sycophancy, but they use completely different mechanics depending on how dangerous the task is.
 
-### 1. `/conduct-reviewing-loop` (The Ping-Pong Loop)
+### 1. `/conduct-reviewing-loop`
 
 This is a fast loop between two entities: the Author and a Fresh Reviewer.
 
@@ -83,7 +83,7 @@ This is a fast loop between two entities: the Author and a Fresh Reviewer.
 Draft ➔ Fresh Reviewer #1 (Finds flaws) ➔ Patch Draft ➔ Fresh Reviewer #2 (Pass) ➔ Code ➔ Diff Audit
 ```
 
-### 2. `/conduct-deep-reviewing-loop` (The Multi-Agent Air-Gap)
+### 2. `/conduct-deep-reviewing-loop`
 
 When you are touching databases, core engines, or security, a single reviewer is not enough. This skill builds a 3-layer assembly line with up to 10 specialized reviewers.
 
