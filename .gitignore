@@ -1,5 +1,7 @@
 .agents/
 .scratch/
+skills/conduct-deep-reviewing-loop/scratch/
+skills/conduct-reviewing-loop/scratch/
 .devutil/
 *.log
 .DS_Store
