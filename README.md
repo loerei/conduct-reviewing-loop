@@ -68,6 +68,37 @@ flowchart TD
 
 ---
 
+## Under the Hood: How They Actually Work
+
+Both skills exist to stop AI sycophancy, but they use completely different mechanics depending on how dangerous the task is.
+
+### 1. `/conduct-reviewing-loop` (The Ping-Pong Loop)
+
+This is a fast loop between two entities: the Author and a Fresh Reviewer.
+
+- **Mode A (Plan Audit)**: The author drafts a plan. A fresh reviewer reads it from scratch and writes down blocking issues. The author patches the plan directly, and a completely new reviewer audits the clean text. This loops until the plan passes consecutive rounds without a single objection.
+- **Mode B (Diff Audit)**: Once the code is written, the reviewer ignores all human conversation and audits only the raw `git diff` and terminal test outputs. If the agent forgot an edge case or wrote a fake test, it gets rejected right there.
+
+```
+Draft ➔ Fresh Reviewer #1 (Finds flaws) ➔ Patch Draft ➔ Fresh Reviewer #2 (Pass) ➔ Code ➔ Diff Audit
+```
+
+### 2. `/conduct-deep-reviewing-loop` (The Multi-Agent Air-Gap)
+
+When you are touching databases, core engines, or security, a single reviewer is not enough. This skill builds a 3-layer assembly line with up to 10 specialized reviewers.
+
+- **Layer 1 (Main Agent)**: Owns the code changes and applies clean mutations.
+- **Layer 2 (Review Host & Critical Gate)**: The referee. Before round 1, it inspects your task and picks only the active specialists needed (like picking Data Migration for SQL changes, but skipping UI for a backend worker).
+- **Layer 3 (The Specialists)**: Up to 10 isolated reviewers across 4 dependency tiers (Architect ➔ Readiness, Security, Data Migration, Testability ➔ Logic, Edgecase, Performance, Observability ➔ UI).
+
+#### The Air-Gap Principle
+Reviewers are strictly blinded. They never see round numbers, historical arguments, or each other's reports. They only see the current document and their domain checklist. This prevents the classic AI failure where reviewer #3 agrees with reviewer #2 just because it saw reviewer #2's output.
+
+#### Dynamic DAG & Full Sweep
+If an issue is found in Layer 3.2 (e.g. a broken database migration), only Layer 3.2, 3.3, and 3.4 are re-audited after the fix. Once all active targeted tiers pass, the Host runs a Full Sweep where 100% of the active team must audit the final static snapshot and pass unanimously.
+
+---
+
 ## Key Rules Built In
 
 - **Zero sycophancy**: Reviewers are forbidden from praising the draft or giving polite passes. If something is missing, they reject it with exact line citations.
