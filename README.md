@@ -92,7 +92,7 @@ When you are touching databases, core engines, or security, a single reviewer is
 - **Layer 3 (The Specialists)**: Up to 10 isolated reviewers across 4 dependency tiers (Architect ➔ Readiness, Security, Data Migration, Testability ➔ Logic, Edgecase, Performance, Observability ➔ UI).
 
 #### The Air-Gap Principle
-Reviewers are strictly blinded. They never see round numbers, historical arguments, or each other's reports. They only see the current document and their domain checklist. This prevents the classic AI failure where reviewer #3 agrees with reviewer #2 just because it saw reviewer #2's output.
+Reviewers are strictly blinded. They never see round numbers, historical arguments, or each other's reports. They only see the current document and their domain checklist. This prevents the classic AI failure where reviewer #3 agrees with reviewer #2 just because it saw reviewer #2's output. **Every reviewer thinks this is the first time your plan is being reviewed.**
 
 #### Dynamic DAG & Full Sweep
 If an issue is found in Layer 3.2 (e.g. a broken database migration), only Layer 3.2, 3.3, and 3.4 are re-audited after the fix. Once all active targeted tiers pass, the Host runs a Full Sweep where 100% of the active team must audit the final static snapshot and pass unanimously.
