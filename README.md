@@ -37,7 +37,7 @@ flowchart TD
     Plan --> Decision{"Scope & Risk?"}
     
     Decision -->|"Normal feature / Localized fix"| ModeA["/conduct-reviewing-loop (Mode A)<br/>Fast single-reviewer plan audit loop"]
-    Decision -->|"High-stakes / Schema DB / Core architecture"| Deep["/conduct-deep-reviewing-loop<br/>10 specialist roles, DAG routing, zero-leak air-gap"]
+    Decision -->|"High-stakes / Schema DB / Core architecture"| Deep["/conduct-deep-reviewing-loop<br/>11 specialist roles, Reviewer-level DAG, zero-leak air-gap"]
     
     ModeA --> Implement["Execute Code & Run Tests"]
     Deep --> Implement
@@ -58,7 +58,7 @@ flowchart TD
 
 - **Use `/conduct-deep-reviewing-loop`**:
   - Best for: High-stakes architectural changes, database schema migrations, distributed state, concurrency, or core engine rewrites.
-  - What it does: Spins up a multi-agent hierarchy with up to 10 isolated specialist roles across 4 dependency tiers (Data Migration, Testability, Performance, Observability, Security, etc.). Reviewers are strictly isolated from host reasoning so they cannot anchor on prior iterations.
+  - What it does: Spins up a multi-agent hierarchy with up to 11 isolated specialist roles across 4 dependency tiers (Architect, Progress, Readiness, Security, Data Migration, Testability, Logic, Edgecase, Performance, Observability, UI). Reviewers are strictly isolated from host reasoning so they cannot anchor on prior iterations.
 
 ### 2. The Implementation Stage (After writing code)
 
@@ -85,17 +85,19 @@ Draft ➔ Fresh Reviewer #1 (Finds flaws) ➔ Patch Draft ➔ Fresh Reviewer #2 
 
 ### 2. `/conduct-deep-reviewing-loop`
 
-When you are touching databases, core engines, or security, a single reviewer is not enough. This skill builds a 3-layer assembly line with up to 10 specialized reviewers.
+When you are touching databases, core engines, or security, a single reviewer is not enough. This skill builds a 3-layer assembly line with up to 11 specialized reviewers.
 
 - **Layer 1 (Main Agent)**: Owns the code changes and applies clean mutations.
 - **Layer 2 (Review Host & Critical Gate)**: The referee. Before round 1, it inspects your task and picks only the active specialists needed (like picking Data Migration for SQL changes, but skipping UI for a backend worker).
-- **Layer 3 (The Specialists)**: Up to 10 isolated reviewers across 4 dependency tiers (Architect ➔ Readiness, Security, Data Migration, Testability ➔ Logic, Edgecase, Performance, Observability ➔ UI).
+- **Layer 3 (The Specialists)**: Up to 11 isolated reviewers across 4 dependency tiers (Architect, Progress ➔ Readiness, Security, Data Migration, Testability ➔ Logic, Edgecase, Performance, Observability ➔ UI).
 
 #### The Air-Gap Principle
 Reviewers are strictly blinded. They never see round numbers, historical arguments, or each other's reports. They only see the current document and their domain checklist. This prevents the classic AI failure where reviewer #3 agrees with reviewer #2 just because it saw reviewer #2's output. **Every reviewer thinks this is the first time your plan is being reviewed.**
 
-#### Dynamic DAG & Full Sweep
-If an issue is found in Layer 3.2 (e.g. a broken database migration), only Layer 3.2, 3.3, and 3.4 are re-audited after the fix. Once all active targeted tiers pass, the Host runs a Full Sweep where 100% of the active team must audit the final static snapshot and pass unanimously.
+#### Reviewer-level Targeted Routing & Backfill
+If the reviewer finds a bug (say, a missing regex check in Security), you don't want to waste tokens re-running database or UI reviewers who have nothing to do with that fix. The Host filters out untouched reviewers so only the affected specialists re-check the fix.
+
+Once the fix passes, the rest of the team audits the final static draft to make sure nothing broke upstream. Every single active reviewer must approve the final version before it passes.
 
 ---
 
