@@ -18,7 +18,7 @@
     {
       "name": "conduct-deep-reviewing-loop",
       "path": "skills/conduct-deep-reviewing-loop/SKILL.md",
-      "description": "Multi-agent deep reviewing loop with 10 specialist roles across 4 Tiers, topological DAG routing, and anti-anchoring air-gap."
+      "description": "Multi-agent deep reviewing loop with 11 specialist roles across 4 Tiers, topological DAG routing, and anti-anchoring air-gap."
     }
   ]
 }
