@@ -19,6 +19,11 @@
       "name": "conduct-deep-reviewing-loop",
       "path": "skills/conduct-deep-reviewing-loop/SKILL.md",
       "description": "Multi-agent deep reviewing loop with 11 specialist roles across 4 Tiers, topological DAG routing, and anti-anchoring air-gap."
+    },
+    {
+      "name": "conduct-deep-reviewing-loop-with-cross-review",
+      "path": "skills/conduct-deep-reviewing-loop-with-cross-review/SKILL.md",
+      "description": "Multi-agent deep reviewing loop with cross-domain remediation review to validate proposed remediations against cross-domain standards before DA mutation."
     }
   ]
 }

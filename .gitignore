@@ -1,6 +1,7 @@
 .agents/
 .scratch/
 skills/conduct-deep-reviewing-loop/scratch/
+skills/conduct-deep-reviewing-loop-with-cross-review/scratch/
 skills/conduct-reviewing-loop/scratch/
 .devutil/
 *.log
