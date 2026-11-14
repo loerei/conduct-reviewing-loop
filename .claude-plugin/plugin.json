@@ -1,6 +1,6 @@
 {
   "name": "conduct-reviewing-loop",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Multi-agent review loops that force AI agents to stop grading their own homework.",
   "author": {
     "name": "loerei",
@@ -18,12 +18,7 @@
     {
       "name": "conduct-deep-reviewing-loop",
       "path": "skills/conduct-deep-reviewing-loop/SKILL.md",
-      "description": "Multi-agent deep reviewing loop with 11 specialist roles across 4 Tiers, topological DAG routing, and anti-anchoring air-gap."
-    },
-    {
-      "name": "conduct-deep-reviewing-loop-with-cross-review",
-      "path": "skills/conduct-deep-reviewing-loop-with-cross-review/SKILL.md",
-      "description": "Multi-agent deep reviewing loop with cross-domain remediation review to validate proposed remediations against cross-domain standards before DA mutation."
+      "description": "Multi-agent deep reviewing loop with 12 specialist roles across 4 Tiers, topological DAG routing, anti-anchoring air-gap, external trace vault archival, and default Cross-Domain Remediation Review (!NCR to disable)."
     }
   ]
 }

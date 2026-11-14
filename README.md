@@ -35,13 +35,10 @@ flowchart TD
     Plan --> Decision{"Scope & Risk?"}
     
     Decision -->|"Normal feature / Localized fix"| ModeA["/conduct-reviewing-loop (Mode A)"]
-    Decision -->|"High-stakes / Schema DB / Core architecture"| DeepChoice{"Inter-domain risk?"}
-    DeepChoice -->|"Standard"| Deep["/conduct-deep-reviewing-loop"]
-    DeepChoice -->|"you are rich"| Cross["/conduct-deep-reviewing-loop-with-cross-review<br/>(might get your wallet burned)"]
+    Decision -->|"High-stakes / Schema DB / Core architecture"| Deep["/conduct-deep-reviewing-loop<br/>(Cross-Review enabled by default; add !NCR to disable)"]
     
     ModeA --> Implement["Execute Code & Run Tests"]
     Deep --> Implement
-    Cross --> Implement
     
     Implement --> ModeB["/conduct-reviewing-loop (Mode B)"]
     ModeB --> Done["Verified & Ready to Merge"]
@@ -59,12 +56,8 @@ flowchart TD
 
 - **Use `/conduct-deep-reviewing-loop`**:
   - Best for: High-stakes architectural changes, database schema migrations, distributed state, concurrency, or core engine rewrites.
-  - What it does: Spins up a multi-agent hierarchy of blinded domain specialists over a dependency DAG to audit critical specs without anchoring bias.
-
-- **Use `/conduct-deep-reviewing-loop-with-cross-review`**:
-  - Best for: Complex specs where a fix proposed by one specialist risks missing standards in sibling domains, causing round bloat.
-  - What it does: Everything in `/conduct-deep-reviewing-loop`, plus touched sibling specialists must cross-audit and approve remediation drafts before any fix touches the plan.
-  - Cost note: Burns ~1.75x more tokens in a single round. But by resolving sibling standards upfront and eliminating 2 to 3 follow-up rounds, it might cut total token consumption by half on complex specs while producing unfragmented diffs.
+  - What it does: Spins up a multi-agent hierarchy of 12 blinded domain specialists across 4 topological DAG tiers with external trace vault archival (`!PA<N>` / `<N>C` continuous budgets) and Cross-Domain Remediation Review enabled by default, where touched sibling specialists cross-audit remediation drafts before fixes touch the plan.
+  - Tradeoff & opt-out: Cross-Review adds ~1.75x tokens per single round, but often cuts total round count and prevents fragmented diffs on complex specs. Pass `!NCR` to disable Cross-Review for simpler or budget-sensitive deep runs.
 
 ### 2. The Implementation Stage (After writing code)
 
